@@ -21,7 +21,7 @@ export default async function Home() {
     return await fetchPhotos(`${searchEndpoint}?per_page=${config.photos.search.per_page}&query=${query}`);
   }
   
-  const photos = await fetchPhotos(`${listEndpoint}?per_page=${config.photos.list.per_page}`);
+  const photos = await fetchPhotos(`${listEndpoint}?per_page=${config.photos.list.per_page}&order_by=${config.photos.list.order_by[0]}`);
 
   return (
     <Photos

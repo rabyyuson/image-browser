@@ -1,6 +1,5 @@
 "use server";
 
-import { Photo } from "@/lib/types/types";
 import dotenv from "dotenv";
 
 dotenv.config();
