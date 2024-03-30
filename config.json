@@ -3,9 +3,13 @@
     "photos" : {
         "list": {
             "endpoint": "/photos",
-            "page": "1",
             "per_page": "30",
             "order_by": [ "latest", "popular", "oldest" ]
+        },
+        "search": {
+            "endpoint": "/search/photos",
+            "per_page": "30",
+            "order_by": [ "relevant", "latest" ]
         }
     }
 }

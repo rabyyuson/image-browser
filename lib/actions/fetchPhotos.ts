@@ -1,20 +1,15 @@
 "use server";
 
 import { Photo } from "@/lib/types/types";
-import config from "@/config.json";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-export async function fetchPhotos({
-    orderBy
-}: {
-    orderBy: string;
-}): Promise<Photo[]> {
+export async function fetchPhotos(requestUrl: string) {
     try {
         const fetchData = async () => {
             const response = await fetch(
-                `${config.unsplash_api_endpoint}/photos?per_page=${config.photos.list.per_page}&order_by=${orderBy}`,
+                requestUrl,
                 {
                     method: "GET",
                     headers: {
