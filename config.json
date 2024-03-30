@@ -1,3 +1,11 @@
 {
-    "unsplash_api_endpoint": "https://api.unsplash.com"
+    "unsplash_api_endpoint": "https://api.unsplash.com",
+    "photos" : {
+        "list": {
+            "endpoint": "/photos",
+            "page": "1",
+            "per_page": "30",
+            "order_by": [ "latest", "popular", "oldest" ]
+        }
+    }
 }
