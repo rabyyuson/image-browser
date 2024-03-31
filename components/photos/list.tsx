@@ -1,48 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Photo } from "@/lib/types/types";
 import config from "@/config.json";
+import SearchBar from "@/components/photos/search-bar";
 import clsx from "clsx";
 
 export default function Photos({
-    photos,
     onOrderByChange,
-    onSearchChange,
 }: {
-    photos: Photo[];
     onOrderByChange: (orderBy: string) => Promise<Photo[]>;
-    onSearchChange: (query: string) => Promise<Photo>;
 }) {
-    const [searchText, setSearchText] = useState("");
-    const [filteredPhotos, setFilteredPhotos] = useState(photos);
+    const [filteredPhotos, setFilteredPhotos] = useState<Photo[]>([]);
     const [selectedOrderBy, setSelectedOrderBy] = useState(config.photos.list.order_by[0]);
+
+    useEffect(() => {
+        async function fetchPhotos() {
+            const photos = await onOrderByChange(config.photos.list.order_by[0]);
+            setFilteredPhotos(photos);
+        }
+        fetchPhotos();
+    }, []);
 
     return (
         <div className="container mx-auto my-10">
             <div className="flex flex-row">
-                <form 
-                    onSubmit={async (event) => {
-                        event.preventDefault();
-                        const photos = await onSearchChange(searchText);
-                        setFilteredPhotos(photos.results);
-                    }}
-                >
-                    <input
-                        className="border border-black px-2 py-1 mb-5"
-                        type="text"
-                        placeholder="Search a photo..."
-                        value={searchText}
-                        required
-                        onChange={(event) => { setSearchText(event.target.value) }}
-                    />
-                    <button
-                        type="submit"
-                        className="border border-black px-2 py-1 mb-5"
-                    >
-                        Search
-                    </button>
-                </form>
+                <SearchBar id="" />
             </div>
             <div className="flex flex-row gap-5 items-center justify-center mb-10">
                 {config.photos.list.order_by.map((orderBy, index) => (
