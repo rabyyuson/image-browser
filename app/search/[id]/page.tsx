@@ -13,7 +13,11 @@ export default async function Home({
   async function handleOnSearchChange(query: string): Promise<Photo> {
     "use server";
 
-    return await fetchPhotos(`${config.unsplash_api_endpoint}${config.photos.search.endpoint}?per_page=${config.photos.search.per_page}&query=${query}`);
+    return await fetchPhotos(
+        `${config.unsplash_api_endpoint}${config.unsplash_api.photos.search.endpoint}` +
+        `?per_page=${config.unsplash_api.photos.search.per_page}` +
+        `&query=${query}`
+    );
   }
   
   return (

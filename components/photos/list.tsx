@@ -3,32 +3,28 @@
 import { useEffect, useState } from "react";
 import { Photo } from "@/lib/types/types";
 import config from "@/config.json";
-import SearchBar from "@/components/photos/search-bar";
 import clsx from "clsx";
 
-export default function Photos({
+export default function List({
     onOrderByChange,
 }: {
     onOrderByChange: (orderBy: string) => Promise<Photo[]>;
 }) {
     const [filteredPhotos, setFilteredPhotos] = useState<Photo[]>([]);
-    const [selectedOrderBy, setSelectedOrderBy] = useState(config.photos.list.order_by[0]);
+    const [selectedOrderBy, setSelectedOrderBy] = useState(config.unsplash_api.photos.list.order_by[0]);
 
     useEffect(() => {
         async function fetchPhotos() {
-            const photos = await onOrderByChange(config.photos.list.order_by[0]);
+            const photos = await onOrderByChange(config.unsplash_api.photos.list.order_by[0]);
             setFilteredPhotos(photos);
         }
         fetchPhotos();
     }, []);
 
     return (
-        <div className="container mx-auto my-10">
-            <div className="flex flex-row">
-                <SearchBar id="" />
-            </div>
-            <div className="flex flex-row gap-5 items-center justify-center mb-10">
-                {config.photos.list.order_by.map((orderBy, index) => (
+        <div>
+            <div className="flex flex-row gap-5 mb-10">
+                {config.unsplash_api.photos.list.order_by.map((orderBy, index) => (
                     <div
                         key={index}
                         className="flex flex-row gap-2"
@@ -60,7 +56,7 @@ export default function Photos({
                     </div>
                 ))}
             </div>
-            <ul className="grid grid-cols-4 gap-10">
+            <ul className="grid grid-cols-2 gap-5 md:grid-cols-3">
                 {filteredPhotos.map(photo => (
                     <li key={photo.id}>
                         <img src={photo.urls.small} />

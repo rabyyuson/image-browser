@@ -1,15 +1,35 @@
 {
-    "unsplash_api_endpoint": "https://api.unsplash.com",
-    "photos" : {
-        "list": {
-            "endpoint": "/photos",
-            "per_page": "30",
-            "order_by": [ "latest", "popular", "oldest" ]
+    "navigation": [
+        {
+            "url": "/",
+            "label": "Collections"
         },
-        "search": {
-            "endpoint": "/search/photos",
-            "per_page": "30",
-            "order_by": [ "relevant", "latest" ]
+        {
+            "url": "/list",
+            "label": "List"
+        },
+        {
+            "url": "/search",
+            "label": "Search"
+        }
+    ],
+    "unsplash_api_endpoint": "https://api.unsplash.com",
+    "unsplash_api": {
+        "photos" : {
+            "collections": {
+                "endpoint": "/collections",
+                "per_page": "30"
+            },
+            "list": {
+                "endpoint": "/photos",
+                "per_page": "30",
+                "order_by": [ "latest", "popular", "oldest" ]
+            },
+            "search": {
+                "endpoint": "/search/photos",
+                "per_page": "30",
+                "order_by": [ "relevant", "latest" ]
+            }
         }
     }
 }

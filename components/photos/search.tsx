@@ -24,11 +24,11 @@ export default function Search({
     }, []);
 
     return (
-        <div className="container mx-auto my-10">
+        <div>
             <div className="flex flex-row">
                 <SearchBar id={id} />
             </div>
-            <ul className="grid grid-cols-4 gap-10">
+            <ul className="grid grid-cols-2 gap-5 md:grid-cols-3">
                 {filteredPhotos.map(photo => (
                     <li key={photo.id}>
                         <img src={photo.urls.small} />
