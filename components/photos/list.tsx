@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Photo } from "@/lib/types/types";
 import config from "@/config.json";
+import SearchBar from "@/components/photos/search-bar";
 import clsx from "clsx";
 
 export default function List({
@@ -23,7 +24,8 @@ export default function List({
 
     return (
         <div>
-            <div className="flex flex-row gap-5 mb-10">
+            <SearchBar id="" />
+            <div className="flex flex-row gap-5 mb-5">
                 {config.unsplash_api.photos.list.order_by.map((orderBy, index) => (
                     <div
                         key={index}
@@ -47,7 +49,7 @@ export default function List({
                         <label
                             htmlFor={orderBy} 
                             className={clsx(
-                                selectedOrderBy === orderBy && "bg-purple-700 text-white",
+                                selectedOrderBy === orderBy && "bg-blue-700 text-white",
                                 "flex flex-row gap-2 px-5 py-2 border border-black cursor-pointer",
                             )}
                         >

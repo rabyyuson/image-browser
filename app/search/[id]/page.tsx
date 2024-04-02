@@ -10,13 +10,14 @@ export default async function Home({
 }: {
     params: { id: string; };
 }) {
-  async function handleOnSearchChange(query: string): Promise<Photo> {
+  async function handleOnSearchChange(query: string, orderBy: string): Promise<Photo> {
     "use server";
 
     return await fetchPhotos(
         `${config.unsplash_api_endpoint}${config.unsplash_api.photos.search.endpoint}` +
         `?per_page=${config.unsplash_api.photos.search.per_page}` +
-        `&query=${query}`
+        `&query=${query}` +
+        `&order_by=${orderBy}`
     );
   }
   
