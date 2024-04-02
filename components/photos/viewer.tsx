@@ -16,6 +16,7 @@ export default function Viewer({
                         alt=""
                         width={photo.width}
                         height={photo.height}
+                        className="rounded-lg"
                     />
                 </div>
                 <div className="md:w-1/2">

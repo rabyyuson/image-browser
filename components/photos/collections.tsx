@@ -16,7 +16,7 @@ export default function Collections({
                 {photos.map(photo => (
                     <li key={photo.id}>
                         <Link href={`/collection/${photo.id}`}>
-                            <img src={photo.cover_photo.urls.small} />
+                            <img src={photo.cover_photo.urls.small} className="rounded-lg" />
                         </Link>
                     </li>
                 ))}

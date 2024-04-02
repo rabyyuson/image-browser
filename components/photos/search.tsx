@@ -69,7 +69,7 @@ export default function Search({
                 {filteredPhotos.map(photo => (
                     <li key={photo.id}>
                         <Link href={`/photos/${photo.id}`}>
-                            <img src={photo.urls.small} />
+                            <img src={photo.urls.small} className="rounded-lg" />
                         </Link>
                     </li>
                 ))}
