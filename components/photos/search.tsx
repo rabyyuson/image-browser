@@ -4,13 +4,16 @@ import { useEffect, useState } from "react";
 import { Photo } from "@/lib/types/types";
 import config from "@/config.json";
 import SearchBar from "@/components/photos/search-bar";
+import PhotoGrid from "@/components/photos/photo-grid";
 import clsx from "clsx";
 
 export default function Search({
     params,
     onSearchChange,
 }: {
-    params: { id: string; };
+    params: {
+        id: string;
+    };
     onSearchChange: (query: string, orderBy: string) => Promise<Photo>;
 }) {
     const [filteredPhotos, setFilteredPhotos] = useState<Photo[]>([]);
@@ -46,8 +49,6 @@ export default function Search({
                                 const orderBy = event.target.value;
                                 setSelectedOrderBy(orderBy);
 
-                                console.log(id, orderBy)
-
                                 const photos = await onSearchChange(id, orderBy);
                                 setFilteredPhotos(photos.results);
                             }}
@@ -64,13 +65,16 @@ export default function Search({
                     </div>
                 ))}
             </div>
-            <ul className="grid grid-cols-2 gap-5 md:grid-cols-3">
-                {filteredPhotos.map(photo => (
-                    <li key={photo.id}>
-                        <img src={photo.urls.small} />
-                    </li>
+            <PhotoGrid
+                photos={filteredPhotos.map(photo => (
+                    {
+                        id: photo.id,
+                        image: {
+                            url: photo.urls.small,
+                        },
+                    }
                 ))}
-            </ul>
+            />
         </div>
     );
 }

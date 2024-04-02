@@ -8,7 +8,9 @@ import config from "@/config.json";
 export default async function Home({
     params,
 }: {
-    params: { id: string; };
+    params: {
+      id: string;
+    };
 }) {
   async function handleOnSearchChange(query: string, orderBy: string): Promise<Photo> {
     "use server";
