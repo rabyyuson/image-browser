@@ -1,7 +1,6 @@
 "use client";
 
 import { Photo } from "@/lib/types/types";
-import SearchBar from "@/components/photos/search-bar";
 
 export default function Viewer({
     photo,
@@ -10,11 +9,10 @@ export default function Viewer({
 }) {
     return (
         <div>
-            <SearchBar id="" />
-            <div className="flex flex-col md:flex-row gap-5">
+            <div className="flex flex-col md:flex-row gap-5 mb-5">
                 <div className="md:w-1/2">
                     <img
-                        src={photo.urls.raw}
+                        src={photo.urls.regular}
                         alt=""
                         width={photo.width}
                         height={photo.height}
@@ -42,7 +40,7 @@ export default function Viewer({
                     <br/>
 
                     <b>Tags:</b>
-                    <p>{photo.tags.map((tag: { type: string, title: string }) => tag.title).join(", ")}</p>
+                    <p>{photo?.tags?.map((tag: { type: string, title: string }) => tag.title).join(", ")}</p>
                 </div>
             </div>
         </div>
