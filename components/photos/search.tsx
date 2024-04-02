@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Photo } from "@/lib/types/types";
 import config from "@/config.json";
 import SearchBar from "@/components/photos/search-bar";
-import PhotoGrid from "@/components/photos/photo-grid";
+import Link from "next/link";
 import clsx from "clsx";
 
 export default function Search({
@@ -57,7 +57,7 @@ export default function Search({
                             htmlFor={orderBy} 
                             className={clsx(
                                 selectedOrderBy === orderBy && "bg-blue-700 text-white",
-                                "flex flex-row gap-2 px-5 py-2 border border-black cursor-pointer",
+                                "flex flex-row gap-2 px-2 py-1 border border-black cursor-pointer",
                             )}
                         >
                             {orderBy.charAt(0).toUpperCase()}{orderBy.slice(1,orderBy.length)}
@@ -65,16 +65,15 @@ export default function Search({
                     </div>
                 ))}
             </div>
-            <PhotoGrid
-                photos={filteredPhotos.map(photo => (
-                    {
-                        id: photo.id,
-                        image: {
-                            url: photo.urls.small,
-                        },
-                    }
+            <ul className="grid grid-cols-2 gap-5 md:grid-cols-3">
+                {filteredPhotos.map(photo => (
+                    <li key={photo.id}>
+                        <Link href={`/photos/${photo.id}`}>
+                            <img src={photo.urls.small} />
+                        </Link>
+                    </li>
                 ))}
-            />
+            </ul>
         </div>
     );
 }

@@ -2,7 +2,7 @@
 
 import { Photo } from "@/lib/types/types";
 import SearchBar from "@/components/photos/search-bar";
-import PhotoGrid from "@/components/photos/photo-grid";
+import Link from "next/link";
 
 export default function Collections({
     photos,
@@ -12,16 +12,15 @@ export default function Collections({
     return (
         <div>
             <SearchBar id="" />
-            <PhotoGrid
-                photos={photos.map(photo => (
-                    {
-                        id: photo.id,
-                        image: {
-                            url: photo.cover_photo.urls.small,
-                        },
-                    }
+            <ul className="grid grid-cols-2 gap-5 md:grid-cols-3">
+                {photos.map(photo => (
+                    <li key={photo.id}>
+                        <Link href={`/collection/${photo.id}`}>
+                            <img src={photo.cover_photo.urls.small} />
+                        </Link>
+                    </li>
                 ))}
-            />
+            </ul>
         </div>
     );
 }
