@@ -11,7 +11,7 @@ export default function Navigation() {
                     <li key={index}>
                         <Link
                             href={navigation.url}
-                            className="bg-indigo-700 text-white rounded-md flex font-semibold text-sm px-4 py-2 hover:bg-indigo-600"
+                            className="bg-lime-700 text-white rounded-md flex font-semibold text-sm px-4 py-2 hover:bg-lime-600"
                         >
                             {navigation.label}
                         </Link>
