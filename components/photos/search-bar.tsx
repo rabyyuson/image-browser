@@ -21,7 +21,7 @@ export default function SearchBar({
         >
             <div className="flex flex-row gap-2 sm:border-r-[1px] border-gray-700 pr-4">
                 <input
-                    className="rounded-md text-sm px-3"
+                    className="rounded-md text-sm px-3 md:min-w-80"
                     type="text"
                     placeholder="Look up photos..."
                     value={decodeURI(searchText)}
