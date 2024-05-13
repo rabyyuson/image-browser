@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.ReactGridGallery {
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
+.ReactGridGallery_tile {
+  background: none !important;
+}
+
+.ReactGridGallery_tile-viewport {
+  border-radius: 10px;
+}
+
+.ReactGridGallery_tile-viewport img {
+  margin: 10px;
+}

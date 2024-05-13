@@ -14,26 +14,27 @@ export default function SearchBar({
 
     return (
         <form
-            className="flex flex-row gap-1"
             onSubmit={async (event) => {
                 event.preventDefault();
                 router.push(`/search/${searchText}`);
             }}
         >
-            <input
-                className="border border-black px-2 py-1 mb-5"
-                type="text"
-                placeholder="Look up photos..."
-                value={decodeURI(searchText)}
-                required
-                onChange={(event) => { setSearchText(event.target.value) }}
-            />
-            <button
-                type="submit"
-                className="border border-black px-2 py-1 mb-5 bg-blue-700 text-white"
-            >
-                Search
-            </button>
+            <div className="flex flex-row gap-2 sm:border-r-[1px] border-gray-700 pr-4">
+                <input
+                    className="rounded-md text-sm px-3"
+                    type="text"
+                    placeholder="Look up photos..."
+                    value={decodeURI(searchText)}
+                    required
+                    onChange={(event) => { setSearchText(event.target.value) }}
+                />
+                <button
+                    type="submit"
+                    className="bg-gray-700 text-white rounded-md flex font-semibold text-sm px-4 py-2 hover:bg-gray-600"
+                >
+                    Search
+                </button>
+            </div>
         </form>
     );
 }

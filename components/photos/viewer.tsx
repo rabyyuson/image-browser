@@ -7,6 +7,16 @@ export default function Viewer({
 }: {
     photo: Photo;
 }) {
+    if (photo?.errors) {
+        return (
+            <div>
+                <div className="flex flex-col">
+                    {photo.errors.toString()}
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div>
             <div className="flex flex-col md:flex-row gap-5 mb-5">
