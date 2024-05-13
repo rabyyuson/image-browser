@@ -19,7 +19,13 @@ export default async function Page() {
   const photos = await fetchCollections();
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={(
+      <div className="flex items-center justify-center mt-20">
+          <h1 className="text-4xl font-bold">
+              Fetching photos...
+          </h1>
+      </div>
+    )}>
       <Collections photos={photos} />
     </Suspense>
   );

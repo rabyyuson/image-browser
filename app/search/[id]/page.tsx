@@ -1,5 +1,6 @@
 "use server";
 
+import { Suspense } from "react";
 import Search from "@/components/photos/search";
 import { Photo } from "@/lib/types/types";
 import { fetchPhotos } from "@/lib/actions/fetchPhotos";
@@ -24,9 +25,17 @@ export default async function Home({
   }
   
   return (
-    <Search
-        params={params}
-        onSearchChange={handleOnSearchChange}
-    />
+    <Suspense fallback={(
+      <div className="flex items-center justify-center mt-20">
+          <h1 className="text-4xl font-bold">
+              Searching photos...
+          </h1>
+      </div>
+    )}>
+      <Search
+          params={params}
+          onSearchChange={handleOnSearchChange}
+      />
+    </Suspense>
   );
 }

@@ -48,16 +48,6 @@ export default function Search({
         alt: photo.alt_description,
     }));
 
-    if (!images.length) {
-        return (
-            <div className="flex items-center justify-center mt-20">
-                <h1 className="text-4xl font-bold">
-                    No photos found for <span className="font-extrabold text-lime-700">{id}</span>!
-                </h1>
-            </div>
-        );
-    }
-
     return (
         <div className="-mt-5">
             <div className="border-t-[1px] border-gray-700 pt-5 flex flex-col sm:flex-row items-center justify-center gap-2 p-5 rounded-md bg-gray-900 mb-3">
