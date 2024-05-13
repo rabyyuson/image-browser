@@ -16,8 +16,12 @@ export default function Collections({
         width: photo.cover_photo.width,
         height: photo.cover_photo.height,
         customOverlay: (
-          <div className="absolute bottom-0 z-10 bg-black p-5 opacity-80 text-sm rounded-b-lg capitalize text-white flex w-full">
-            <div>{photo.cover_photo.alt_description}</div>
+          <div className="absolute bottom-0 z-10 bg-black p-5 opacity-80 text-sm rounded-b-lg  text-white flex w-full">
+            <div>{
+                photo.cover_photo.alt_description.slice(0,1).toUpperCase() +
+                photo.cover_photo.alt_description.slice(1,photo.cover_photo.alt_description.length)
+            }
+            </div>
           </div>
         ),
         alt: photo.cover_photo.alt_description,

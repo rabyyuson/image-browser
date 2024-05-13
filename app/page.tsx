@@ -3,6 +3,7 @@
 import { Photo } from "@/lib/types/types";
 import Collections from "@/components/photos/collections";
 import { fetchPhotos } from "@/lib/actions/fetchPhotos";
+import { Suspense } from "react";
 import config from "@/config.json";
 
 export default async function Page() {
@@ -18,6 +19,8 @@ export default async function Page() {
   const photos = await fetchCollections();
 
   return (
-    <Collections photos={photos} />
+    <Suspense fallback={<div>Loading...</div>}>
+      <Collections photos={photos} />
+    </Suspense>
   );
 }

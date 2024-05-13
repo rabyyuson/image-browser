@@ -3,7 +3,6 @@
 import { Photo } from "@/lib/types/types";
 import Viewer from "@/components/photos/viewer";
 import { fetchPhotos } from "@/lib/actions/fetchPhotos";
-import SearchBar from "@/components/photos/search-bar";
 import config from "@/config.json";
 
 async function fetchCollections(id: string): Promise<Photo[]> {
@@ -30,7 +29,6 @@ export default async function Page({
 
     return (
         <div>
-            <SearchBar id="" />
             {collections.length
                 ? collections.map((collection: Photo) => (
                     <Viewer photo={collection} key={collection.id} />

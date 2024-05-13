@@ -2,9 +2,7 @@
 
 import Viewer from "@/components/photos/viewer";
 import { fetchPhotos } from "@/lib/actions/fetchPhotos";
-import SearchBar from "@/components/photos/search-bar";
 import config from "@/config.json";
-import Search from "@/components/photos/search";
 
 async function fetchPhoto(id: string) {
     return await fetchPhotos(
@@ -23,7 +21,6 @@ export default async function Page({
 
     return (
         <>
-            <SearchBar id="" />
             <Viewer photo={photo} />
         </>
     );

@@ -19,7 +19,7 @@ export default function SearchBar({
                 router.push(`/search/${searchText}`);
             }}
         >
-            <div className="flex flex-row gap-2 sm:border-r-[1px] border-gray-700 pr-4">
+            <div className="flex flex-row gap-2 sm:border-l-[1px] border-gray-700 pl-4">
                 <input
                     className="rounded-md text-sm px-3 md:min-w-80"
                     type="text"
