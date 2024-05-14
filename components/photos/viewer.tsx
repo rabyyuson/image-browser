@@ -6,7 +6,6 @@ import Link from "next/link";
 import Calendar from "@/components/icons/calendar";
 import Camera from "@/components/icons/camera";
 import MapPin from "@/components/icons/map-pin";
-import Expand from "@/components/icons/expand";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
@@ -15,6 +14,8 @@ export default function Viewer({
 }: {
     photo: Photo;
 }) {
+    const [expandImage, setExpandImage] = useState(false);
+    
     if (photo?.errors) {
         return (
             <div className="flex items-center justify-center mt-10">
@@ -24,8 +25,6 @@ export default function Viewer({
             </div>
         );
     }
-
-    const [expandImage, setExpandImage] = useState(false);
 
     const createdAt = new Date(photo.created_at);
     const options: Intl.DateTimeFormatOptions = {
