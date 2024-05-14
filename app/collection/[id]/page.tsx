@@ -30,9 +30,13 @@ export default async function Page({
     return (
         <div>
             {collections.length
-                ? collections.map((collection: Photo) => (
-                    <Viewer photo={collection} key={collection.id} />
-                ))
+                ? (
+                    <div className="grid grid-cols-2 grid-flow-row gap-5 mb-10">
+                        {collections.map((collection: Photo) => (
+                            <Viewer photo={collection} key={collection.id} />
+                        ))}
+                    </div>
+                )
                 : <Viewer photo={{
                     ...photo.cover_photo,
                     ...photo,

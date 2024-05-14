@@ -1,10 +1,14 @@
 "use client";
 
+import { useState } from "react";
 import { Photo } from "@/lib/types/types";
 import Link from "next/link";
 import Calendar from "@/components/icons/calendar";
 import Camera from "@/components/icons/camera";
 import MapPin from "@/components/icons/map-pin";
+import Expand from "@/components/icons/expand";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 
 export default function Viewer({
     photo,
@@ -21,6 +25,8 @@ export default function Viewer({
         );
     }
 
+    const [expandImage, setExpandImage] = useState(false);
+
     const createdAt = new Date(photo.created_at);
     const options: Intl.DateTimeFormatOptions = {
       weekday: undefined,
@@ -29,26 +35,29 @@ export default function Viewer({
       day: "numeric",
     };
 
-    console.log(photo)
-
     return (
         <div className="p-10 my-5 bg-gray-50 border border-gray-100 drop-shadow-md rounded-lg h-full items-center justify-center">
-            <div className="flex flex-row items-center justify-center mb-20">
+            <Lightbox
+                open={expandImage}
+                close={() => setExpandImage(false)}
+                slides={[ { src: photo.urls.raw } ]}
+                render={{
+                    buttonPrev: () => null,
+                    buttonNext: () => null,
+                }}
+            />
+            <div className="flex flex-row items-center justify-center relative mb-20">
                 <img
                     src={photo.urls.regular}
                     alt={photo.alt_description}
                     width={500}
                     height={500}
-                    sizes="50vw"
-                    style={{
-                        width: "50%",
-                        height: "auto",
-                    }}
-                    className="rounded-lg"
+                    className="rounded-lg cursor-pointer z-0 hover:opacity-80"
+                    onClick={() => { setExpandImage(true) }}
                 />
             </div>
             <div className="flex flex-col gap-2">
-                <div className="flex flex-row justify-between mb-10">
+                <div className="flex flex-col md:flex-row justify-between mb-10 gap-5 md:gap-0">
                     <div className="flex flex-col">
                         <a
                             href={photo.user.links.html}
@@ -64,39 +73,47 @@ export default function Viewer({
                             </span>
                         </a>
                     </div>
-                    <div className="flex flex-row gap-10">
-                        <div className="flex flex-col items-center">
-                            <span className="font-base text-sm text-slate-500">
-                                Views
-                            </span>
-                            <span className="font-semibold text-sm">
-                                {photo.views}
-                            </span>
-                        </div>
-                        <div className="flex flex-col items-center">
-                            <span className="font-base text-sm text-slate-500">
-                                Likes
-                            </span>
-                            <span className="font-semibold text-sm">
-                                {photo.likes}
-                            </span>
-                        </div>
-                        <div className="flex flex-col items-center">
-                            <span className="font-base text-sm text-slate-500">
-                                Downloads
-                            </span>
-                            <span className="font-semibold text-sm">
-                                {photo.downloads}
-                            </span>
-                        </div>
-                        <div className="flex flex-col items-center">
-                            <span className="font-base text-sm text-slate-500">
-                                Color
-                            </span>
-                            <span className="font-semibold text-sm mt-[2px]">
-                                <span className={`w-4 h-4 flex drop-shadow-sm rounded-full`} style={{ backgroundColor: photo.color }}></span>
-                            </span>
-                        </div>
+                    <div className="flex flex-row gap-5 md:gap-10">
+                        {photo.views && (
+                            <div className="flex flex-col items-center">
+                                <span className="font-base text-sm text-slate-500">
+                                    Views
+                                </span>
+                                <span className="font-semibold text-sm">
+                                    {photo.views}
+                                </span>
+                            </div>
+                        )}
+                        {photo.likes && (
+                            <div className="flex flex-col items-center">
+                                <span className="font-base text-sm text-slate-500">
+                                    Likes
+                                </span>
+                                <span className="font-semibold text-sm">
+                                    {photo.likes}
+                                </span>
+                            </div>
+                        )}
+                        {photo.downloads && (
+                            <div className="flex flex-col items-center">
+                                <span className="font-base text-sm text-slate-500">
+                                    Downloads
+                                </span>
+                                <span className="font-semibold text-sm">
+                                    {photo.downloads}
+                                </span>
+                            </div>
+                        )}
+                        {photo.color && (
+                            <div className="flex flex-col items-center">
+                                <span className="font-base text-sm text-slate-500">
+                                    Color
+                                </span>
+                                <span className="font-semibold text-sm mt-[2px]">
+                                    <span className={`w-4 h-4 flex drop-shadow-sm rounded-full`} style={{ backgroundColor: photo.color }}></span>
+                                </span>
+                            </div>
+                        )}
                     </div>
                 </div>
 
@@ -108,7 +125,7 @@ export default function Viewer({
                     </div>
                 )}
 
-                {photo.location.name && (
+                {photo.location?.name && (
                     <div className="flex flex-row gap-2 items-center font-base text-sm text-slate-500">
                         <MapPin />
                         {" "}
@@ -116,7 +133,7 @@ export default function Viewer({
                     </div>
                 )}
 
-                {photo.exif.name && (
+                {photo.exif?.name && (
                     <div className="flex flex-row gap-2 items-center font-base text-sm text-slate-500">
                         <Camera />
                         {" "}

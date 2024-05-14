@@ -15,7 +15,8 @@
     "react": "^18",
     "react-dom": "^18",
     "react-grid-gallery": "^1.0.1",
-    "react-photoswipe-gallery": "^3.0.1"
+    "react-photoswipe-gallery": "^3.0.1",
+    "yet-another-react-lightbox": "^3.18.0"
   },
   "devDependencies": {
     "@types/node": "^20",
