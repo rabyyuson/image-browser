@@ -12,7 +12,7 @@ export default function Collections({
     const router = useRouter();
 
     const images = photos.map(photo => ({
-        src: photo.cover_photo.urls.small,
+        src: photo.cover_photo.urls.regular,
         width: photo.cover_photo.width,
         height: photo.cover_photo.height,
         customOverlay: (

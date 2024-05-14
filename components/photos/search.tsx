@@ -37,7 +37,7 @@ export default function Search({
 
     const images = filteredPhotos.map(photo => ({
         id: photo.id,
-        src: photo.urls.small,
+        src: photo.urls.regular,
         width: photo.width,
         height: photo.height,
         customOverlay: (
