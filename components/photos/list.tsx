@@ -5,6 +5,7 @@ import { Photo } from "@/lib/types/types";
 import config from "@/config.json";
 import { useRouter } from "next/navigation";
 import { Gallery } from "react-grid-gallery";
+import Image from "next/image";
 import clsx from "clsx";
 
 export default function List({
@@ -16,11 +17,14 @@ export default function List({
     
     const [filteredPhotos, setFilteredPhotos] = useState<Photo[]>([]);
     const [selectedOrderBy, setSelectedOrderBy] = useState(config.unsplash_api.photos.list.order_by[0]);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        setIsLoading(true);
         async function fetchPhotos() {
             const photos = await onOrderByChange(config.unsplash_api.photos.list.order_by[0]);
             setFilteredPhotos(photos);
+            setIsLoading(false);
         }
         fetchPhotos();
     }, []);
@@ -44,7 +48,17 @@ export default function List({
 
     return (
         <div className="-mt-5">
-            {Boolean(images.length) && (
+            {isLoading && (
+                <div className="flex items-center justify-center mt-20">
+                    <Image
+                        src="/loading.gif"
+                        width={50}
+                        height={50}
+                        alt="Loading image"
+                    />
+                </div>
+            )}
+            {(!isLoading && Boolean(images.length)) && (
                 <div className="border-t-[1px] border-gray-700 pt-5 flex flex-col sm:flex-row items-center justify-center gap-2 p-5 rounded-md bg-gray-900 mb-3">
                     <div className="flex flex-row gap-2 items-center justify-center">
                         {config.unsplash_api.photos.list.order_by.map((orderBy, index) => (
@@ -82,6 +96,13 @@ export default function List({
                             </div>
                         ))}
                     </div>
+                </div>
+            )}
+            {(!isLoading && !Boolean(images.length)) && (
+                <div className="flex items-center justify-center mt-20">
+                    <h1 className="text-2xl font-bold">
+                        No photos found
+                    </h1>
                 </div>
             )}
             <ul>

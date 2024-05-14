@@ -5,6 +5,7 @@ import { Photo } from "@/lib/types/types";
 import config from "@/config.json";
 import { useRouter } from "next/navigation";
 import { Gallery } from "react-grid-gallery";
+import Image from "next/image";
 import clsx from "clsx";
 
 export default function Search({
@@ -20,13 +21,16 @@ export default function Search({
     
     const [filteredPhotos, setFilteredPhotos] = useState<Photo[]>([]);
     const [selectedOrderBy, setSelectedOrderBy] = useState(config.unsplash_api.photos.search.order_by[0]);
+    const [isLoading, setIsLoading] = useState(false);
 
     const { id } = params;
 
     useEffect(() => {
+        setIsLoading(true);
         async function fetchPhotos() {
             const photos = await onSearchChange(id, config.unsplash_api.photos.search.order_by[0]);
             setFilteredPhotos(photos.results);
+            setIsLoading(false);
         }
         fetchPhotos();
     }, []);
@@ -50,44 +54,63 @@ export default function Search({
 
     return (
         <div className="-mt-5">
-            <div className="border-t-[1px] border-gray-700 pt-5 flex flex-col sm:flex-row items-center justify-center gap-2 p-5 rounded-md bg-gray-900 mb-3">
-                <div className="flex flex-row gap-2 items-center justify-center">
-                    {config.unsplash_api.photos.search.order_by.map((orderBy, index) => (
-                        <div
-                            key={index}
-                            className="flex flex-row gap-2"
-                        >
-                            <input
-                                className="hidden"
-                                id={orderBy}
-                                type="radio"
-                                name="filter"
-                                key={index}
-                                value={orderBy}
-                                onChange={async (event) => {
-                                    const orderBy = event.target.value;
-                                    setSelectedOrderBy(orderBy);
-
-                                    const photos = await onSearchChange(id, orderBy);
-                                    setFilteredPhotos(photos.results);
-                                }}
-                            />
-                            <label
-                                htmlFor={orderBy} 
-                                className={clsx(
-                                    "text-white rounded-md flex font-semibold text-sm px-4 py-2 cursor-pointer",
-                                    selectedOrderBy === orderBy
-                                        ? "bg-lime-600"
-                                        : "bg-lime-800",
-                                    
-                                )}
-                            >
-                                {orderBy.charAt(0).toUpperCase()}{orderBy.slice(1,orderBy.length)}
-                            </label>
-                        </div>
-                    ))}
+            {isLoading && (
+                <div className="flex items-center justify-center mt-20">
+                    <Image
+                        src="/loading.gif"
+                        width={50}
+                        height={50}
+                        alt="Loading image"
+                    />
                 </div>
-            </div>
+            )}
+            {(!isLoading && Boolean(images.length)) && (
+                <div className="border-t-[1px] border-gray-700 pt-5 flex flex-col sm:flex-row items-center justify-center gap-2 p-5 rounded-md bg-gray-900 mb-3">
+                    <div className="flex flex-row gap-2 items-center justify-center">
+                        {config.unsplash_api.photos.search.order_by.map((orderBy, index) => (
+                            <div
+                                key={index}
+                                className="flex flex-row gap-2"
+                            >
+                                <input
+                                    className="hidden"
+                                    id={orderBy}
+                                    type="radio"
+                                    name="filter"
+                                    key={index}
+                                    value={orderBy}
+                                    onChange={async (event) => {
+                                        const orderBy = event.target.value;
+                                        setSelectedOrderBy(orderBy);
+
+                                        const photos = await onSearchChange(id, orderBy);
+                                        setFilteredPhotos(photos.results);
+                                    }}
+                                />
+                                <label
+                                    htmlFor={orderBy} 
+                                    className={clsx(
+                                        "text-white rounded-md flex font-semibold text-sm px-4 py-2 cursor-pointer",
+                                        selectedOrderBy === orderBy
+                                            ? "bg-lime-600"
+                                            : "bg-lime-800",
+                                        
+                                    )}
+                                >
+                                    {orderBy.charAt(0).toUpperCase()}{orderBy.slice(1,orderBy.length)}
+                                </label>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+            {(!isLoading && !Boolean(images.length)) && (
+                <div className="flex items-center justify-center mt-20">
+                    <h1 className="text-2xl font-bold">
+                        No photos found for <span className="text-lime-800">{id}</span>
+                    </h1>
+                </div>
+            )}
             <ul>
                 <Gallery
                     images={images}

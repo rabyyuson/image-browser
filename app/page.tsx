@@ -21,7 +21,7 @@ export default async function Page() {
   return (
     <Suspense fallback={(
       <div className="flex items-center justify-center mt-20">
-          <h1 className="text-4xl font-bold">
+        <h1 className="text-2xl font-bold">
               Fetching photos...
           </h1>
       </div>
