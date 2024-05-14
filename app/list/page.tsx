@@ -1,6 +1,5 @@
 "use server";
 
-import { Suspense } from "react";
 import List from "@/components/photos/list";
 import { Photo } from "@/lib/types/types";
 import { fetchPhotos } from "@/lib/actions/fetchPhotos";
@@ -18,14 +17,6 @@ export default async function Home() {
   }
   
   return (
-    <Suspense fallback={(
-      <div className="flex items-center justify-center mt-20">
-          <h1 className="text-2xl font-bold">
-              Fetching photos...
-          </h1>
-      </div>
-    )}>
-      <List onOrderByChange={handleOrderByChange} />
-    </Suspense>
+    <List onOrderByChange={handleOrderByChange} />
   );
 }

@@ -55,7 +55,7 @@ export default function Search({
     return (
         <div className="-mt-5">
             {isLoading && (
-                <div className="flex items-center justify-center mt-20">
+                <div className="flex items-center justify-center mt-[60px]">
                     <Image
                         src="/loading.gif"
                         width={50}

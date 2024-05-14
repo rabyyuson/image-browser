@@ -3,11 +3,10 @@
 import { Photo } from "@/lib/types/types";
 import Collections from "@/components/photos/collections";
 import { fetchPhotos } from "@/lib/actions/fetchPhotos";
-import { Suspense } from "react";
 import config from "@/config.json";
 
 export default async function Page() {
-  async function fetchCollections(): Promise<Photo[]> {
+  async function handleFetchCollections(): Promise<Photo[]> {
     "use server";
 
     return await fetchPhotos(
@@ -16,17 +15,7 @@ export default async function Page() {
     );
   }
 
-  const photos = await fetchCollections();
-
   return (
-    <Suspense fallback={(
-      <div className="flex items-center justify-center mt-20">
-        <h1 className="text-2xl font-bold">
-              Fetching photos...
-          </h1>
-      </div>
-    )}>
-      <Collections photos={photos} />
-    </Suspense>
+    <Collections onFetchCollections={handleFetchCollections} />
   );
 }
