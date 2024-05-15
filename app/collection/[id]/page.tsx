@@ -31,7 +31,7 @@ export default async function Page({
         <div>
             {collections.length
                 ? (
-                    <div className="grid grid-cols-2 grid-flow-row gap-5 mb-10">
+                    <div className="flex flex-col sm:flex-none sm:grid sm:grid-cols-2 sm:grid-flow-row gap-5 mb-10">
                         {collections.map((collection: Photo) => (
                             <Viewer photo={collection} key={collection.id} />
                         ))}

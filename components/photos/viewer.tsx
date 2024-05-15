@@ -35,7 +35,7 @@ export default function Viewer({
     };
 
     return (
-        <div className="p-10 my-5 bg-gray-50 border border-gray-100 drop-shadow-md rounded-lg h-full items-center justify-center">
+        <div className="px-5 py-10 lg:p-10 my-5 bg-gray-50 border border-gray-100 drop-shadow-md rounded-lg h-full items-center justify-center">
             <Lightbox
                 open={expandImage}
                 close={() => setExpandImage(false)}
@@ -45,7 +45,7 @@ export default function Viewer({
                     buttonNext: () => null,
                 }}
             />
-            <div className="flex flex-row items-center justify-center relative mb-20">
+            <div className="flex flex-row items-center justify-center relative mb-10 lg:mb-20">
                 <img
                     src={photo.urls.regular}
                     alt={photo.alt_description}
@@ -56,7 +56,7 @@ export default function Viewer({
                 />
             </div>
             <div className="flex flex-col gap-2">
-                <div className="flex flex-col md:flex-row justify-between mb-10 gap-5 md:gap-0">
+                <div className="flex flex-col md:flex-row justify-between mb-5 lg:mb-10 gap-5 md:gap-0">
                     <div className="flex flex-col">
                         <a
                             href={photo.user.links.html}
@@ -72,9 +72,9 @@ export default function Viewer({
                             </span>
                         </a>
                     </div>
-                    <div className="flex flex-row gap-5 md:gap-10">
+                    <div className="flex flex-col sm:flex-row gap-5 lg:gap-10">
                         {photo.views && (
-                            <div className="flex flex-col items-center">
+                            <div className="flex flex-col lg:items-center">
                                 <span className="font-base text-sm text-slate-500">
                                     Views
                                 </span>
@@ -84,7 +84,7 @@ export default function Viewer({
                             </div>
                         )}
                         {photo.likes && (
-                            <div className="flex flex-col items-center">
+                            <div className="flex flex-col lg:items-center">
                                 <span className="font-base text-sm text-slate-500">
                                     Likes
                                 </span>
@@ -94,7 +94,7 @@ export default function Viewer({
                             </div>
                         )}
                         {photo.downloads && (
-                            <div className="flex flex-col items-center">
+                            <div className="flex flex-col lg:items-center">
                                 <span className="font-base text-sm text-slate-500">
                                     Downloads
                                 </span>
@@ -104,7 +104,7 @@ export default function Viewer({
                             </div>
                         )}
                         {photo.color && (
-                            <div className="flex flex-col items-center">
+                            <div className="flex flex-col lg:items-center">
                                 <span className="font-base text-sm text-slate-500">
                                     Color
                                 </span>
