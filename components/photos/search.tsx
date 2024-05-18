@@ -40,14 +40,11 @@ export default function Search({
         src: photo.urls.regular,
         width: photo.width,
         height: photo.height,
-        customOverlay: (
-          <div className="absolute bottom-0 z-10 bg-black p-5 opacity-80 text-sm rounded-b-lg  text-white flex w-full">
-            <div>{
-                photo.alt_description.slice(0,1).toUpperCase() +
-                photo.alt_description.slice(1,photo.alt_description.length)
-            }
+        customOverlay: photo.alt_description && (
+            <div className="absolute bottom-0 z-10 bg-black p-5 opacity-80 text-sm rounded-b-lg  text-white flex w-full">
+                <div>{photo.alt_description}
+                </div>
             </div>
-          </div>
         ),
         alt: photo.alt_description,
     }));
